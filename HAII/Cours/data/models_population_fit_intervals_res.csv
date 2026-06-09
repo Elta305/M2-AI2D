@@ -1,0 +1,6 @@
+,participant,n_locks,model,k,parameter names,parameter values,parameter intervals,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 28.048, 'BETA': 0.173}","{'HORIZON': (26.09, 30.01), 'BETA': (0.14, 0.21)}",-2185.8,10671.6
+,participant,n_locks,model,k,parameter names,parameter values,parameter intervals,log likelihood,BIC
+0,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': -1.0, 'HORIZON': 31.752, 'BETA': -0.049}","{'DISCOUNT': (-1.04, -0.96), 'HORIZON': (29.79, 33.71), 'BETA': (-0.12, 0.02)}",-246.7,9943.4
+,participant,n_locks,model,k,parameter names,parameter values,parameter intervals,log likelihood,BIC
+0,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': -1.004, 'HORIZON': 25.74, 'BETA': -0.001}","{'DISCOUNT': (-1.02, -0.99), 'HORIZON': (23.78, 27.7), 'BETA': (-0.01, 0.0)}",-283.3,10016.6

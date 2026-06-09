@@ -1,0 +1,81 @@
+{
+  "student_id": "21400017",
+  "timestamp": "2025-12-01T17:21:31.319285",
+  "annotations": {
+    "1": {
+      "acte": "assertion",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "2": {
+      "acte": "assertion",
+      "incertitude": 1,
+      "affect": "negatif"
+    },
+    "3": {
+      "acte": "assertion",
+      "incertitude": 5,
+      "affect": "neutre"
+    },
+    "4": {
+      "acte": "assertion",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "5": {
+      "acte": "confirmation",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "6": {
+      "acte": "question",
+      "incertitude": 4,
+      "affect": "neutre"
+    },
+    "7": {
+      "acte": "confirmation",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "8": {
+      "acte": "assertion",
+      "incertitude": 1,
+      "affect": "negatif"
+    },
+    "9": {
+      "acte": "assertion",
+      "incertitude": 1,
+      "affect": "negatif"
+    },
+    "10": {
+      "acte": "expression",
+      "incertitude": 1,
+      "affect": "negatif"
+    },
+    "11": {
+      "acte": "question",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "12": {
+      "acte": "question",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "13": {
+      "acte": "expression",
+      "incertitude": 1,
+      "affect": "negatif"
+    },
+    "14": {
+      "acte": "expression",
+      "incertitude": 1,
+      "affect": "neutre"
+    },
+    "15": {
+      "acte": "assertion",
+      "incertitude": 1,
+      "affect": "neutre"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+pandas
+numpy
+scikit-learn
+Pillow
+joblib
+# Optional: install one of the deep-learning backends to enable `--use-pretrained` image embeddings
+# torch
+# tensorflow

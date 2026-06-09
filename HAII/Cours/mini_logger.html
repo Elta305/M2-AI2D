@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Mini-lab HAI — Logger enrichi (projet)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
+  fieldset { border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+  legend { padding: 0 6px; color: #444; }
+  label { margin-right: 12px; display:inline-flex; align-items:center; gap:6px; }
+  input[type=text], select { padding: 4px 6px; }
+  button { padding: 8px 12px; border-radius: 8px; border:1px solid #ccc; cursor:pointer; }
+  button.primary { border-color:#3765f0; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  table { width:100%; border-collapse:collapse; margin-top:12px; font-size:0.92rem;}
+  th,td { border:1px solid #eee; padding:6px 8px; text-align:left; }
+  thead th { background:#fafafa; position:sticky; top:0; }
+  .pill { padding:2px 8px; border-radius:999px; background:#f0f3ff; border:1px solid #dfe6ff; }
+  .hintbox { padding:8px; border:1px dashed #bbb; border-radius:8px; background:#fcfcff; }
+  .muted { color:#666; font-size:0.9em; }
+</style>
+</head>
+<body>
+
+<h1>Mini-lab HAI — Logger enrichi (aligné v0 + G1–G6)</h1>
+
+<fieldset>
+  <legend>Session & projet</legend>
+  <div class="row">
+    <label>session_id <input id="sessionId" value="" placeholder="auto-UUID si vide" /></label>
+    <label>project_id <input id="projectId" value="HAI2025_projetX" /></label>
+    <label>team_id <input id="teamId" value="T01" /></label>
+    <span id="trialInfo" class="pill">trial_id = 0</span>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Contexte d’essai</legend>
+  <div class="row">
+    <label>condition
+      <select id="condition">
+        <option value="H_only">H_only</option>
+        <option value="H_plus_IA" selected>H_plus_IA</option>
+      </select>
+    </label>
+    <label>slice_id
+      <select id="sliceId">
+        <option value="facile">facile</option>
+        <option value="difficile">difficile</option>
+        <option value="novice">novice</option>
+        <option value="expert">expert</option>
+      </select>
+    </label>
+    <label>précondition OK ? <input id="preOk" type="checkbox" checked /></label>
+    <label>trigger
+      <!-- PERSONNALISEZ ICI POUR VOTRE PROJET -->
+      <select id="trigger">
+        <option value="on_demand">on_demand</option>
+        <option value="auto_after_k_errors" selected>auto_after_k_errors</option>
+        <option value="end_of_step">end_of_step</option>
+      </select>
+    </label>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>1) show_hint (uniquement si H_plus_IA & pas d’abstention)</legend>
+  <div class="row">
+    <label>ai_uncertainty
+      <select id="uncertainty">
+        <option value="low">low</option>
+        <option value="mid" selected>mid</option>
+        <option value="high">high</option>
+        <option value="na">na</option>
+      </select>
+    </label>
+    <label>explanation_variant
+      <select id="explain">
+        <option value="off">off</option>
+        <option value="factors" selected>factors</option>
+        <option value="contrastive">contrastive</option>
+        <option value="na">na</option>
+      </select>
+    </label>
+    <button class="primary" onclick="logShowHint()">Émettre show_hint</button>
+    <div class="hintbox">
+      <div class="muted">Microcopie projet (à personnaliser) — <em>ex.</em> “Proposé car critères A, B, C”.</div>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>2) user_action</legend>
+  <div class="row">
+    <button onclick="logUserAction('accept')">Accepter (accept)</button>
+    <button onclick="logUserAction('override')">Corriger (override)</button>
+    <button onclick="logUserAction('ignore')">Ignorer (ignore)</button>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>3) submit (fin d’essai) & confiance utilisateur</legend>
+  <div class="row">
+    <label>user_confidence (0–1) <input id="uconf" type="range" min="0" max="1" step="0.05" value="0.5" oninput="ucv.value=this.value"/></label>
+    <output id="ucv">0.5</output>
+    <label>correct ?
+      <select id="correct">
+        <option value="">(choisir)</option>
+        <option value="Y">Y</option>
+        <option value="N">N</option>
+      </select>
+    </label>
+  </div>
+  <div class="row" style="margin-top:6px;">
+    <label>notes (trial) <input id="notes" type="text" size="60" placeholder="ex. indice ambigu / tâche facile / erreur haute confiance…"/></label>
+    <button onclick="logSubmit()">Soumettre (submit)</button>
+  </div>
+</fieldset>
+
+<div class="row" style="margin-top:8px;">
+  <button onclick="downloadCSV()" class="primary">Télécharger CSV</button>
+  <button onclick="clearEvents()">Vider</button>
+</div>
+
+<table id="tbl">
+  <thead><tr id="hdr"></tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<p class="muted">Stats rapides (par condition) — AR & décision (ms): <span id="stats"></span></p>
+
+<script>
+// === Colonnes exigées (ordre) ===
+const HEADERS = [
+  "timestamp","session_id","trial_id","condition","event_type","trigger",
+  "ai_output","ai_uncertainty","explanation_variant","human_action",
+  "user_confidence","correct","decision_time_ms","slice_id","precondition_ok",
+  "abstained","fallback_used","notes"
+];
+
+const state = {
+  events: [],
+  trialCounter: 0,
+  lastHintAt: null,
+  sessionId: null
+};
+
+function uuid(){ return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16)); }
+function nowIso(){ return new Date().toISOString(); }
+
+function ensureSession(){
+  const el = document.getElementById('sessionId');
+  if(el.value.trim()===""){ el.value = uuid(); }
+  state.sessionId = el.value.trim();
+}
+
+function getCtx(){
+  ensureSession();
+  return {
+    timestamp: nowIso(),
+    session_id: state.sessionId,
+    trial_id: state.trialCounter,
+    condition: document.getElementById('condition').value,
+    trigger: document.getElementById('trigger').value,
+    slice_id: document.getElementById('sliceId').value,
+    precondition_ok: document.getElementById('preOk').checked
+  };
+}
+
+function newTrial(){
+  state.trialCounter += 1;
+  state.lastHintAt = null;
+  document.getElementById('trialInfo').textContent = "trial_id = " + state.trialCounter;
+}
+
+function abstentionNeeded(ai_uncertainty, preOK){
+  return (ai_uncertainty === "high") || (preOK === false);
+}
+
+function emit(row){
+  // Normalize missing fields to ""
+  const normalized = {};
+  HEADERS.forEach(h=>{
+    let v = row[h];
+    if (v === undefined || v === null) v = "";
+    if (typeof v === "boolean") v = v ? "true" : "false";
+    normalized[h] = v;
+  });
+  state.events.push(normalized);
+  renderTable();
+  renderStats();
+}
+
+// --- 1) show_hint ---
+function logShowHint(){
+  newTrial();
+  const ctx = getCtx();
+  // condition logic
+  const cond = ctx.condition;
+  let ai_uncertainty = document.getElementById('uncertainty').value;
+  let explanation_variant = document.getElementById('explain').value;
+
+  // In H_only => no AI output
+  if(cond === "H_only"){
+    ai_uncertainty = "na";
+    explanation_variant = "off";
+  }
+  const mustAbstain = abstentionNeeded(ai_uncertainty, ctx.precondition_ok);
+  const ai_output = (cond === "H_plus_IA" && !mustAbstain) ? "shown" : "none";
+
+  // Start decision timer only if hint is shown
+  if(ai_output === "shown"){ state.lastHintAt = performance.now(); }
+
+  emit({
+    ...ctx,
+    event_type: "show_hint",
+    ai_output,
+    ai_uncertainty,
+    explanation_variant,
+    human_action: "",
+    user_confidence: "",
+    correct: "",
+    decision_time_ms: "",
+    abstained: mustAbstain ? "true" : "",
+    fallback_used: mustAbstain ? "true" : "",
+    notes: ""
+  });
+}
+
+// --- 2) user_action ---
+function logUserAction(action){
+  if(state.trialCounter === 0){
+    alert("Commencez par show_hint (ou justifiez H_only).");
+    return;
+  }
+  let dt = "";
+  if(state.lastHintAt != null){
+    dt = Math.round(performance.now() - state.lastHintAt);
+  }
+  emit({
+    ...getCtx(),
+    event_type: "user_action",
+    ai_output: "", ai_uncertainty: "", explanation_variant: "",
+    human_action: action,
+    user_confidence: "",
+    correct: "",
+    decision_time_ms: dt,
+    abstained: "", fallback_used: "",
+    notes: ""
+  });
+}
+
+// --- 3) submit ---
+function logSubmit(){
+  if(state.trialCounter === 0){
+    alert("Commencez par show_hint.");
+    return;
+  }
+  const correct = document.getElementById('correct').value;
+  if(!correct){ alert("Choisissez correct = Y ou N."); return; }
+  const uconf = document.getElementById('uconf').value;
+  const notes = (document.getElementById('notes').value || "").trim();
+
+  emit({
+    ...getCtx(),
+    event_type: "submit",
+    ai_output: "", ai_uncertainty: "", explanation_variant: "",
+    human_action: "",
+    user_confidence: uconf,
+    correct: correct,
+    decision_time_ms: "",
+    abstained: "", fallback_used: "",
+    notes: notes
+  });
+}
+
+// --- table & csv ---
+function renderTable(){
+  const hdr = document.getElementById('hdr');
+  const rows = document.getElementById('rows');
+  if(!hdr.hasChildNodes()){
+    HEADERS.forEach(h=>{ const th=document.createElement('th'); th.textContent=h; hdr.appendChild(th); });
+  }
+  rows.innerHTML = "";
+  state.events.forEach(ev=>{
+    const tr=document.createElement('tr');
+    HEADERS.forEach(h=>{ const td=document.createElement('td'); td.textContent=ev[h]; tr.appendChild(td); });
+    rows.appendChild(tr);
+  });
+}
+
+function toCSV(){
+  const escape = v => {
+    if (v === undefined || v === null) v = "";
+    v = String(v);
+    if (v.includes('"') || v.includes(',') || v.includes('\n')){
+      v = '"' + v.replace(/"/g,'""') + '"';
+    }
+    return v;
+  };
+  const lines = [];
+  lines.push(HEADERS.join(","));
+  state.events.forEach(ev=>{
+    const vals = HEADERS.map(h=>escape(ev[h]));
+    lines.push(vals.join(","));
+  });
+  return lines.join("\n");
+}
+
+function downloadCSV(){
+  if(state.events.length < 3){ alert("Attendu: au moins show_hint + user_action + submit (≥ 3 lignes)."); return; }
+  const blob = new Blob([toCSV()], {type: "text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = "events_sample.csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function clearEvents(){
+  state.events = []; state.trialCounter = 0; state.lastHintAt = null;
+  document.getElementById('rows').innerHTML = "";
+  document.getElementById('hdr').innerHTML = "";
+  document.getElementById('trialInfo').textContent = "trial_id = 0";
+  document.getElementById('notes').value = "";
+}
+
+// --- stats rapides ---
+function renderStats(){
+  const s = state.events;
+  const trials = {};
+  s.forEach(r=>{
+    const key = `${r.session_id}#${r.trial_id}#${r.condition}`;
+    if(!trials[key]) trials[key] = { condition:r.condition, accept:0, total:0, dts:[] };
+    if(r.event_type==="user_action"){
+      trials[key].total++;
+      if(r.human_action==="accept") trials[key].accept++;
+      if(r.decision_time_ms) trials[key].dts.push(Number(r.decision_time_ms));
+    }
+  });
+  const agg = {};
+  Object.values(trials).forEach(t=>{
+    const c = t.condition;
+    if(!agg[c]) agg[c] = {acc:0, tot:0, dts:[]};
+    agg[c].acc += t.accept; agg[c].tot += t.total; agg[c].dts.push(...t.dts);
+  });
+  const fmt = (x)=> isFinite(x)? Math.round(x): "–";
+  const out = Object.entries(agg).map(([c,v])=>{
+    const ar = v.tot ? (v.acc/v.tot) : 0;
+    const dt = v.dts.length? v.dts.reduce((a,b)=>a+b,0)/v.dts.length : NaN;
+    return `${c}: AR=${ar.toFixed(2)}, décision≈${fmt(dt)} ms`;
+  }).join(" | ");
+  document.getElementById('stats').textContent = out || "—";
+}
+</script>
+</body>
+</html>

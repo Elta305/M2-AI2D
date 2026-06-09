@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "description": "Corpus pour TP annotation - 15 tours utilisateur à analyser",
+    "context": "Agent conversationnel d'assistance technique (problème de connexion WiFi)",
+    "consigne": "Pour chaque tour, annotez : acte de dialogue, niveau d'incertitude (1-5), affect (positif/neutre/négatif/ambigu)"
+  },
+  "turns": [
+    {
+      "id": 1,
+      "speaker": "user",
+      "text": "Bonjour, j'ai un problème avec ma connexion internet",
+      "context_before": "(début de conversation)"
+    },
+    {
+      "id": 2,
+      "speaker": "user",
+      "text": "Depuis ce matin ça marche plus du tout",
+      "context_before": "Agent: Bonjour ! Je suis là pour vous aider. Pouvez-vous me décrire le problème ?"
+    },
+    {
+      "id": 3,
+      "speaker": "user",
+      "text": "La box je crois... enfin je suis pas sûr, les voyants sont bizarres",
+      "context_before": "Agent: D'accord. Est-ce que le problème vient de votre box ou de votre ordinateur ?"
+    },
+    {
+      "id": 4,
+      "speaker": "user",
+      "text": "Il y en a un rouge et deux qui clignotent",
+      "context_before": "Agent: Pouvez-vous me décrire l'état des voyants sur votre box ?"
+    },
+    {
+      "id": 5,
+      "speaker": "user", 
+      "text": "Ok",
+      "context_before": "Agent: Le voyant rouge indique un problème de synchronisation. Essayez de redémarrer la box."
+    },
+    {
+      "id": 6,
+      "speaker": "user",
+      "text": "C'est quoi le bouton de redémarrage ? Je vois rien qui s'appelle comme ça",
+      "context_before": "Agent: Appuyez sur le bouton de redémarrage à l'arrière pendant 5 secondes."
+    },
+    {
+      "id": 7,
+      "speaker": "user",
+      "text": "Ah d'accord c'est le petit trou avec une aiguille ? J'ai fait, ça redémarre",
+      "context_before": "Agent: C'est le petit bouton encastré, vous pouvez utiliser un trombone pour appuyer."
+    },
+    {
+      "id": 8,
+      "speaker": "user",
+      "text": "Toujours pareil, le voyant est encore rouge...",
+      "context_before": "Agent: Parfait, attendez 2 minutes que la box redémarre complètement."
+    },
+    {
+      "id": 9,
+      "speaker": "user",
+      "text": "Ça fait 3 fois que je redémarre et ça change rien !",
+      "context_before": "Agent: Pouvez-vous réessayer le redémarrage une fois de plus ?"
+    },
+    {
+      "id": 10,
+      "speaker": "user",
+      "text": "J'ai besoin d'internet pour mon travail, c'est urgent là",
+      "context_before": "Agent: Je comprends. Je vais vérifier s'il y a une panne dans votre secteur."
+    },
+    {
+      "id": 11,
+      "speaker": "user",
+      "text": "Une panne générale ? Depuis ce matin ? Et personne prévient ?",
+      "context_before": "Agent: Il y a effectivement une panne signalée dans votre zone depuis 8h ce matin."
+    },
+    {
+      "id": 12,
+      "speaker": "user",
+      "text": "Et c'est réparé quand ?",
+      "context_before": "Agent: Nos équipes travaillent actuellement sur le problème."
+    },
+    {
+      "id": 13,
+      "speaker": "user",
+      "text": "Cet après-midi peut-être... super, et mon meeting de 10h je fais comment",
+      "context_before": "Agent: La résolution est estimée en début d'après-midi."
+    },
+    {
+      "id": 14,
+      "speaker": "user",
+      "text": "Bon ok merci quand même pour l'info",
+      "context_before": "Agent: Je suis vraiment désolé pour ce désagrément. Puis-je faire autre chose ?"
+    },
+    {
+      "id": 15,
+      "speaker": "user",
+      "text": "Non c'est bon, je vais me débrouiller avec mon téléphone",
+      "context_before": "Agent: N'hésitez pas à nous recontacter si le problème persiste cet après-midi."
+    }
+  ]
+}

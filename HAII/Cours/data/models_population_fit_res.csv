@@ -1,0 +1,65 @@
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,1,"HORIZON,BETA",{'BETA': 0.08},-2225.8,7601.6
+1,-1,-1,normative,2,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.05, 'BETA': 0.18}",-2195.7,10691.4
+2,-1,-1,hyperbolic,2,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.14, 'BETA': 0.19}",-2200.6,10701.2
+3,-1,-1,quasi-hyperbolic,3,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.95, 'BETA': 0.19, 'GAMMA': 0.94}",-2195.7,13841.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 33.15, 'BETA': 0.17}",-2186.1,10672.2
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 28.69, 'BETA': 0.17}",-2185.8,13821.6
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 34.19, 'BETA': 0.17}",-2186.6,13823.2
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 1.0, 'HORIZON': 19.65, 'BETA': 0.17, 'GAMMA': 1.0}",-2190.4,16980.8
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 20.46, 'BETA': 0.166}",-2190.3,10680.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 69.495, 'BETA': 0.225}",-2204.0,13858.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.013, 'HORIZON': 42.918, 'BETA': 0.171}",-2191.7,13833.4
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.0, 'HORIZON': 59.777, 'BETA': 0.268, 'GAMMA': 0.0}",-2201.7,17003.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 89.225, 'BETA': 0.084}",-2223.8,10747.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 68.519, 'BETA': 0.225}",-2204.0,13858.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.028, 'HORIZON': 50.889, 'BETA': 0.175}",-2194.0,13838.0
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.0, 'HORIZON': 83.866, 'BETA': 0.268, 'GAMMA': 0.0}",-2201.7,17003.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 39.325, 'BETA': 0.165}",-2190.2,10680.4
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 61.566, 'BETA': 0.225}",-2204.0,13858.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 9.969, 'BETA': 0.216}",-2203.4,13856.8
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.257, 'HORIZON': 58.998, 'BETA': 0.267, 'GAMMA': 0.0}",-2201.7,17003.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 0.497, 'BETA': 1.154}",-2239.8,10779.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 32.134, 'BETA': 0.225}",-2204.0,13858.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.214, 'HORIZON': 1.613, 'BETA': 0.268}",-2201.7,13853.4
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.0, 'HORIZON': 74.075, 'BETA': 0.268, 'GAMMA': 0.0}",-2201.7,17003.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 99.542, 'BETA': 0.078}",-2225.6,10751.2
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 102.919, 'BETA': 0.225}",-2204.0,13858.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.065, 'HORIZON': 64.827, 'BETA': 0.18}",-2197.9,13845.8
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.0, 'HORIZON': 27.645, 'BETA': 0.268, 'GAMMA': 0.0}",-2201.7,17003.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 6.437, 'BETA': 0.165}",-2210.4,10720.8
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 24.819, 'BETA': 0.225}",-2204.0,13858.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.5, 'HORIZON': 10.889, 'BETA': 0.215}",-2203.2,13856.4
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.099, 'HORIZON': 34.872, 'BETA': 0.268, 'GAMMA': 0.0}",-2201.7,17003.4
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 27.269, 'BETA': 0.173}",-2185.8,10671.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.035, 'HORIZON': 57.798, 'BETA': 0.18}",-2194.2,13838.4
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 36.74, 'BETA': 0.169}",-2188.1,13826.2
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.987, 'HORIZON': 41.842, 'BETA': 0.173, 'GAMMA': 1.0}",-2191.1,16982.2
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 26.544, 'BETA': 0.173}",-2185.6,10671.2
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 25.281, 'BETA': 0.172}",-2186.3,13822.6
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.008, 'HORIZON': 40.059, 'BETA': 0.17}",-2190.6,13831.2
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.998, 'HORIZON': 37.619, 'BETA': 0.169, 'GAMMA': 1.0}",-2189.1,16978.2
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 27.027, 'BETA': 0.173}",-2185.8,10671.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 29.12, 'BETA': 0.174}",-2185.3,13820.6
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.022, 'HORIZON': 47.73, 'BETA': 0.174}",-2193.0,13836.0
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 1.0, 'HORIZON': 28.083, 'BETA': 0.173, 'GAMMA': 1.0}",-2185.8,16971.6
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 29.865, 'BETA': 0.174}",-2185.3,10670.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.006, 'HORIZON': 38.277, 'BETA': 0.17}",-2190.0,13830.0
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 26.034, 'BETA': 0.173}",-2185.6,13821.2
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.983, 'HORIZON': 45.017, 'BETA': 0.175, 'GAMMA': 1.0}",-2191.6,16983.2
+,participant,n_locks,model,k,parameter names,parameter values,log likelihood,BIC
+0,-1,-1,no discount,2,"HORIZON,BETA","{'HORIZON': 27.888, 'BETA': 0.173}",-2185.8,10671.6
+1,-1,-1,normative,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 35.656, 'BETA': 0.171}",-2187.2,13824.4
+2,-1,-1,hyperbolic,3,"DISCOUNT,HORIZON,BETA","{'DISCOUNT': 0.0, 'HORIZON': 30.261, 'BETA': 0.173}",-2186.0,13822.0
+3,-1,-1,quasi-hyperbolic,4,"DISCOUNT,HORIZON,BETA,GAMMA","{'DISCOUNT': 0.964, 'HORIZON': 60.876, 'BETA': 0.181, 'GAMMA': 0.992}",-2194.5,16989.0
